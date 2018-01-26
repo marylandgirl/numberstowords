@@ -10,32 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Scanner;
+
 @RestController
 public class MainController {
 
     @RequestMapping("/")
-    public String intToWords(@RequestParam String numStr) {
-        String[] tensNums = {"","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"};
-        boolean parsable = isParsable(numStr);
+    public String intToWords() {
+
+        System.out.print("Enter a number between 1 and 10: ");
+        Scanner keyboard = new Scanner(System.in);
+        String numStr = keyboard.next();
+
+        String[] tensNums = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
         int num = Integer.parseInt(numStr);
-        boolean isValid = parsable && (num >= 1 && num <=10);
-
-        if (! isValid) {
-            return "Invalid input!";
+        while (!numStr.equalsIgnoreCase("x") && (num <1) ||( num > 10)) {
+            if (num < 1 || num > 10) {
+                System.out.println("Invalid entry");
+                System.out.println("Enter a number between 1 and 10: ");
+                keyboard = new Scanner(System.in);
+                numStr = keyboard.next();
+                num = Integer.parseInt(numStr);
+            } else {
+                return tensNums[num];
+            }
         }
 
-        String retStr = tensNums[num];
+        return "Kim this works!";
 
-        return retStr;
-    }
-
-    public static boolean isParsable(String numStr){
-        boolean isParsable = true;
-        try {
-            Integer.parseInt(numStr);
-        } catch (Exception e) {
-            isParsable = false;
-        }
-        return isParsable;
     }
 }
