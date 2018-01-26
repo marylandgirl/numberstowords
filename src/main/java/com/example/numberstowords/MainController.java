@@ -24,19 +24,21 @@ public class MainController {
 
         String[] tensNums = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
         int num = Integer.parseInt(numStr);
-        while (!numStr.equalsIgnoreCase("x") && (num <1) ||( num > 10)) {
+        while (!numStr.equalsIgnoreCase("x") && (num < 1) || (num > 10)) {
             if (num < 1 || num > 10) {
                 System.out.println("Invalid entry");
                 System.out.println("Enter a number between 1 and 10: ");
                 keyboard = new Scanner(System.in);
                 numStr = keyboard.next();
                 num = Integer.parseInt(numStr);
-            } else {
-                return tensNums[num];
+
+
             }
         }
+        if (!numStr.equalsIgnoreCase("x")) {
 
+            return tensNums[num];
+        }
         return "Kim this works!";
-
     }
 }
